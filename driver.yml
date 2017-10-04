@@ -1,0 +1,15 @@
+config:
+  target: 'http://localhost:6969'
+  phases:
+    - duration: 1
+      arrivalRate: 1
+  socketio:
+    - transports: ["websocket"]
+scenarios:
+  - engine: "socketio"
+    flow:
+    - emit:
+          channel: "authen"
+          data: "AAA"
+          namespace: "/driver"
+    - think: 300 # do nothing for 10m and disconnect
