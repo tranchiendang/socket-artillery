@@ -3,8 +3,8 @@ config:
   http:
       maxSockets: 10
   phases:
-    - duration: 10
-      arrivalRate: 100
+    - duration: 1
+      arrivalRate: 1
   processor: "./functions.js"  
 scenarios:
   - name: "Authen and send location" 
@@ -17,10 +17,13 @@ scenarios:
               token: "{{ token }}"
           namespace: "/driver"
     - think: 10
-    - emit:
-          channel: "loc_changed"
-          data:
-              lat: 10.7772780
-              long: 106.7044060
-          namespace: "/driver"
-    - think: 3000
+    - loop:
+        - emit:
+            channel: "loc_changed"
+            data:
+                lat: 10.7772780
+                long: 106.7044060
+            namespace: "/driver"
+        - think: 10
+      count: 10
+    - think: 60
