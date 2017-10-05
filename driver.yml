@@ -3,8 +3,8 @@ config:
   http:
       maxSockets: 10
   phases:
-    - duration: 1
-      arrivalRate: 1
+    - duration: 10
+      arrivalRate: 10
   processor: "./functions.js"  
 scenarios:
   - name: "Authen and send location" 

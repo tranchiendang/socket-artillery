@@ -4,8 +4,9 @@
   "description": "Load testing scripts for Socket.io booking app",
   "main": "index.js",
   "scripts": {
-    "load": "artillery run driver.yml",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "load": "artillery run driver.yml -o report",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "report": "artillery report report"
   },
   "keywords": [
     "socketio",
