@@ -1,24 +1,26 @@
 config:
   target: "http://localhost:6969"
+  http:
+      maxSockets: 10
   phases:
-    - duration: 1
-      arrivalRate: 1
+    - duration: 10
+      arrivalRate: 100
   processor: "./functions.js"  
 scenarios:
   - name: "Authen and send location" 
     engine: "socketio"
     flow:
+    - function: "setParameter"
     - emit:
           channel: "authenticate"
           data:
-              token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTc3MDcsInBob25lIjoiMDk5NzkwNDU1MSIsIm5hbWUiOiJDaHVuZyDEkOG7qWMgQW4iLCJhdmF0YXIiOiIwMDI0OTAuanBnIiwiZW1wbG95ZWVfaWQiOiIwMDI0OTAiLCJ0YXhpX25vIjoiNjIxMiIsImlhdCI6MTUwNzA4MjM1OSwiZXhwIjoxNTA3MTY4NzU5fQ.xQF19JRgoYuGyi_OVLRRuu_HoXDpZxLzgcSWGWBz1UA"
+              token: "{{ token }}"
           namespace: "/driver"
-    - loop:
-          function: "setMessage"
-          emit:
-              channel: "loc_changed"
-              data: "{{ message }}"
-              namespace: "/driver"
-          think: 10
-      count: 1000
-    - think: 300 # do nothing for 10m and disconnect
+    - think: 10
+    - emit:
+          channel: "loc_changed"
+          data:
+              lat: 10.7772780
+              long: 106.7044060
+          namespace: "/driver"
+    - think: 3000
