@@ -5,8 +5,8 @@
 Some scripts for load test socket
 
 ## Usage
-1/ npm run load
-2/ npm run report
+-	 npm run load
+-	 npm run report
 
 ## Developing
 
